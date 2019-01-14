@@ -13,19 +13,7 @@
 </head>
 <body>
 
-<!--
-
-    Registration page for users to register before login.
-    I have not extended the layout.html here as i only 
-    want the form to be display .Making other users accounts safer.
-
-    Forms have comes from Flask WTForms. And the variables i am
-    using are the save as the variables in the forms.py classes.
-
-    I am using bootstrap classes for the form.
--->
-
-    <section class="container">
+   <section class="container">
         <div class="row">
             <div class="col-md-12">
 
@@ -41,25 +29,12 @@
                     {% endif %}
                 {% endwith %}
 
-    <!-- Below is the registration from validation from bootstrap classes wtforms -->
+    <!-- Below is the login from validation from bootstrap classes wtforms -->
 
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Join Today</legend>
-                        <div class="form-group">
-                            {{ form.username.label(class="form-control-label") }}
-                            {% if form.username.errors %}
-                                {{ form.username(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.username.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.username(class="form-control") }}
-                            {% endif %}
-                        </div>
+                        <legend class="border-bottom mb-4">Login</legend>
                         <div class="form-group">
                             {{ form.email.label(class="form-control-label") }}
                             {% if form.email.errors %}
@@ -86,36 +61,29 @@
                                 {{ form.password(class="form-control") }}
                             {% endif %}
                         </div>
-                        <div class="form-group">
-                            {{ form.confirm_password.label(class="form-control-label") }}
-                            {% if form.confirm_password.errors %}
-                                {{ form.confirm_password(class="form-control is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.confirm_password.errors %}
-                                    <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.confirm_password(class="form-control") }}
-                            {% endif %}
+                        <div class="form-check">
+                                {{ form.remember.label(class="form-check-label") }}
+                            {{ form.remember(class="form-check-input ml-2") }}
                         </div>
                     </fieldset>
                     <div class="form-group">
                         {{ form.submit(class=" btn btn-outline-success") }}
                     </div>
+                    <small class="text-muted ml-2">
+                        <a href="#">Forgot password?</a>
+                    </small>
                 </form>
             </div>
 
-<!-- below is the link for users who have login details already -->
+<!-- below is the link for users who have don't login details already -->
 
             <div class="border-top pt-3">
                <small class="text-muted">
-                   Already a memeber? <a href="{{ url_for('login') }}" class="ml-2">Login</a>
+                   Need a account? <a href="{{ url_for('index') }}" class="ml-2">Sign Up</a>
                </small> 
             </div>
         </div>
     </section>
-
         {% block content %}
         {% endblock %}
 </body>
