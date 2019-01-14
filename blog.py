@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
@@ -10,7 +11,18 @@ by use the built in module sercrets and calling
 secrets.token_hex(16) don't forget the number
 
 """
+
 app.config['SECRET_KEY'] = 'ceacbd61a815126f364fba1bc5ea2356'
+
+"""
+
+below is the creation of the database for development purposes it
+will SQLite
+
+"""
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
 
 
 """
