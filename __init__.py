@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 
@@ -32,6 +32,15 @@ and import the db from the main app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
+
+"""
+
+Bcrypt is being used to generate user passwords and encrypt
+them in the database for sercurity.
+
+"""
+
+bcrypt = Bcrypt(app)
 
 """
 
