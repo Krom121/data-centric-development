@@ -45,11 +45,14 @@ bcrypt = Bcrypt(app)
 
 """
 
-below is the instance for the login manager
+below is the instance for the login manager and
+login required
 
 """
 
 login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'warning'
 
 """
 

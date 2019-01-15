@@ -7,7 +7,7 @@
 
     <!-- Boootstrap css which i download instead cdn -->
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/boostrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
 <!--
 
@@ -30,69 +30,23 @@
 {% endif %}
 </head>
 <body>
+<main>
 
-    <!-- Header and navbar for the application -->
+  {% block content %}
+  {% endblock %}
 
-    <header class="header">
-        <header class="site-header">
-            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-                <div class="container">
-                    <a class="navbar-brand mr-4" href="/">Flask Blog</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarToggle">
-                          <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link" href="/">Home</a>
-                            <a class="nav-item nav-link" href="/about">About</a>
-                        </div>
-                          <!-- Navbar Right Side -->
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="/login">Login</a>
-                            <a class="nav-item nav-link" href="/register">Register</a>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    </header>
+</main>
+    
 
-        <!-- main content for the application -->
+    
 
-        <main class="container">
-           <div class="row">
-               <div class="col-md-8">
+                 
+              
 
-                   <!-- Below is the statment to bring in the flashed messages -->
-                   
-                   {% with messages = get_flashed_messages(with_categories=true) %}
-                   {% if messages %}
-                       {% for category, message in messages %}
-                       <div class="alert alert-{{ category }}">
-                           {{ message }}
-                       </div>
-                       {% endfor %}
-                   {% endif %}
-               {% endwith %}
-                    {% block content %}
-                    {% endblock %}
-               </div>
-               <div class="col-md-4">
-                    <h3>Our Sidebar</h3>
-                    <p class='text-muted'>You can put any information here you'd like.
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Latest Posts</li>
-                            <li class="list-group-item list-group-item-light">Announcements</li>
-                            <li class="list-group-item list-group-item-light">Calendars</li>
-                            <li class="list-group-item list-group-item-light">etc</li>
-                        </ul>
-                    </p>
-               </div>
-           </div> 
-        </main>
-
-        <!-- Bootstrap javascript downloaded and not cdn -->
+        <!-- Bootstrap javascript cdn -->
         
-    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     </body>
 </html>
