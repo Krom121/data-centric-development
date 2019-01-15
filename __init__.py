@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
@@ -41,6 +42,14 @@ them in the database for sercurity.
 """
 
 bcrypt = Bcrypt(app)
+
+"""
+
+below is the instance for the login manager
+
+"""
+
+login_manager = LoginManager(app)
 
 """
 

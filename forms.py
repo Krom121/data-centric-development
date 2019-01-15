@@ -41,7 +41,10 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email has been taken. Please choose another')
 
 
+"""
+below is the form class for the login form
 
+"""
 class LoginForm(FlaskForm):
 
     email = StringField('Email',
