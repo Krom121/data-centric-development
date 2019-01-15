@@ -1,4 +1,6 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from blog.models import User
@@ -56,3 +58,34 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
 
     submit = SubmitField('Login Now')
+
+"""
+
+below is the form for updating the user profile
+
+"""
+
+class UpdateProfileForm(FlaskForm):
+    username = StringField('Username',
+        validators=[DataRequired(), Length(min=2, max=20)])
+
+    email = StringField('Email',
+        validators=[DataRequired(), Email()])
+
+    picture = FileField('Update profile image',
+        validators=[FileAllowed(['png', 'jpg'])])
+
+    submit = SubmitField('Update')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('That username has been taken. Please choose another')
+    
+    
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('That email has been taken. Please choose another')
