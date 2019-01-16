@@ -128,7 +128,13 @@ def account():
 """
 
 Below is the route for the user to able to create a then be redireacted to the post 
-page where all users can view each others posts.
+page where all users can view each others posts.The user can also click on a link to
+see the post detail.
+
+Users can updated the posts that they have created, But only the ones they created
+users can not updated anyother users post.A 403 error will be raised(forbidden response)
+
+Users can also delete their own posts, current_user posts.
 
 """
 @app.route("/post/new", methods=['GET', 'POST'])
@@ -141,7 +147,7 @@ def create_post():
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('post'))
-    return render_template('create_post.html', title='create posts', form=form)
+    return render_template('create_post.html', title='Create Posts', form=form, legend='New Post')
 
 
 @app.route("/post", methods=['POST', 'GET'])
@@ -149,3 +155,37 @@ def create_post():
 def post():
     posts = Post.query.all()
     return render_template('post.html', title='Posts', posts=posts)
+
+@app.route("/post/detail/<int:post_id>")
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post_detail.html', title=post.title, post=post)
+
+@app.route("/post/detail/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('post', post_id = post_id))
+    elif request.method == 'GET':    
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Posts', form=form, legend='Update Post')
+
+@app.route("/post/detail/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been Deleted!', 'danger')
+    return redirect(url_for('post'))

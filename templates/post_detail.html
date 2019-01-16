@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Post 4 Life</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('post') }}">Posts<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('create_post') }}">Create Posts</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                        <article class="media">
+                        <div class="media-body p-3 mt-5">
+                        <img class="mb-1" src="{{ url_for('static', filename='img/' + post.author.image_file) }}">
+                        <div class="article-metadata">
+                        <h4 class="mr-2 mt-1 mb-3">{{ post.author.username }}</h4>
+                        <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
+                        {% if post.author == current_user %}
+                        <a class="btn btn-info btn-sm m-1" href="{{ url_for('update_post',  post_id=post.id) }}">Update</a>
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal" >Delete Post</button>
+                        {% endif %}
+                        </div>
+                        <h2 class="p-3 mt-5 text-center">{{ post.title }}</h2>
+                        <p class="text-center">{{ post.content }}</p>
+                    </div>
+                    </article>
+
+                    <!-- Modal for deleting posts -->
+
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Your Post?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
