@@ -1,9 +1,9 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from blog import app, db, bcrypt
-from blog.forms import RegistrationForm, LoginForm, UpdateProfileForm
+from blog.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm
 from blog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -18,7 +18,7 @@ the user will only see the account details page logout and
 new and old post plus the user will be able to create own posts.
 
 For testing purposes i redirect the user back from the login form to the
-registration form tis is just for manual testing to ensure all the code works as
+registration form this is just for manual testing to ensure all the code works as
 expected and validation messages are working.
 
 """
@@ -86,6 +86,7 @@ image names clashing. Also the function resizes the image output for better perf
 of the app.
 
 You wont need to update email or username when updating the profile image.
+You can also update username and email with out updating image.
 
 """
 
@@ -95,7 +96,7 @@ def save_picture(form_picture):
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/img', picture_fn)
     
-    output_size = (200, 200)
+    output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
 
@@ -103,9 +104,11 @@ def save_picture(form_picture):
 
     return picture_fn
 
+
 @app.route("/account", methods=['POST', 'GET'])
 @login_required
 def account():
+    
     form= UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -121,3 +124,28 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='img/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+"""
+
+Below is the route for the user to able to create a then be redireacted to the post 
+page where all users can view each others posts.
+
+"""
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('post'))
+    return render_template('create_post.html', title='create posts', form=form)
+
+
+@app.route("/post", methods=['POST', 'GET'])
+@login_required
+def post():
+    posts = Post.query.all()
+    return render_template('post.html', title='Posts', posts=posts)
