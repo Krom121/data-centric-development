@@ -1,19 +1,22 @@
 {%  extends "layout.html" %}
 
 <!--
+    
     Registration page for users to register before login.
     I have not extended the layout.html here as i only 
     want the form to be display .Making other users accounts safer.
     Forms have comes from Flask WTForms. And the variables i am
     using are the save as the variables in the forms.py classes.
     I am using bootstrap classes for the form.
+
 -->
+
 {% block content %}
     <section class="container">
         <div class="row">
             <div class="col-md-12">
 
-    <!-- Below is the statment to bring in the flashed messages -->
+<!-- Below is the statment to bring in the flashed messages -->
     
     <div class="container mt-4">
             <div class="row justify-content-center">
@@ -31,9 +34,11 @@
         </div>
     </div>
 
-    <!-- Below is the registration from validation from bootstrap classes wtforms -->
+    <h1 class="text-center mt-3">Start Posting</h1>
+
+<!-- Below is the registration from validation from bootstrap classes wtforms -->
             
-                <form method="POST" action="">
+                <form class="mt-8" method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">Join Today</legend>

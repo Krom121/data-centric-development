@@ -1,10 +1,12 @@
 {%  extends "layout.html" %}
+
 {% block content %}
    <section class="container">
         <div class="row">
             <div class="col-md-12">
 
-    <!-- Below is the statment to bring in the flashed messages -->
+<!-- Below is the statment to bring in the flashed messages -->
+
     <div class="container">
             <div class="row justify-content-center">
             <div class="col-md-6">  
@@ -20,7 +22,10 @@
             </div>
         </div>
     </div>
-    <!-- Below is the login from validation from bootstrap classes wtforms -->
+
+<!-- Below is the login from validation from bootstrap classes wtforms -->
+
+    <h1 class="text-center mt-3">Don't delay sign in</h1>
 
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}

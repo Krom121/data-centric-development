@@ -30,9 +30,11 @@ and import the db from the main app
 >>>db.create_all() This will create the instance
 
 """
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
+
 
 """
 

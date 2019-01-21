@@ -153,7 +153,8 @@ def create_post():
 @app.route("/post", methods=['POST', 'GET'])
 @login_required
 def post():
-    posts = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.paginate(page = page, per_page=3)
     return render_template('post.html', title='Posts', posts=posts)
 
 @app.route("/post/detail/<int:post_id>")

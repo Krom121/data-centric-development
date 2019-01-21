@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
     <!-- Boootstrap css which i download instead cdn -->
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
+    
 <!--
     This is the layout tmeplate that will carry the repeated code 
     and internal links/External links for the flask application.
 -->
 
 <!--
+    
     The if and else statements surrounding the title is to
     join the index title with the title of the pages of the website.
     

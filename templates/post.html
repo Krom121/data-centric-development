@@ -24,9 +24,11 @@
       </div>
     </nav>
     </header>
+
     <!-- Below is the statment to bring in the flashed messages -->
-        
-   <div class="container">
+    
+    <h1 class="text-center mt-3">All users posts</h1>
+   <div class="container mt-4">
       <div class="row justify-content-center">
       <div class="col-md-6">     
       {% with messages = get_flashed_messages(with_categories=true) %}
@@ -41,12 +43,12 @@
       </div>
       </div>
       </div>
-    <div class="container mt-4">
+    <div class="container">
     <div class="row justify-content-center">
     <div class="col-sm-8">
-{% for post in posts %}
-<article class="media border-bottom">
-  <div class="media-body p-3 mt-5 mb-5">
+{% for post in posts.items %}
+<article class="media border-bottom mb-4">
+  <div class="media-body">
       <img src="{{ url_for('static', filename='img/' + post.author.image_file) }}">
     <div class="article-metadata">
       <a class="mr-2" href="#">{{ post.author.username }}</a>

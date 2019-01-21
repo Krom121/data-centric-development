@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">Post 4 Life</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,14 +25,14 @@
     </nav>
 </header>
 
-    <div class="container-fluid mt-4">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                         <article class="media">
-                        <div class="media-body p-3 mt-5">
+                        <div class="media-body">
                         <img class="mb-1" src="{{ url_for('static', filename='img/' + post.author.image_file) }}">
                         <div class="article-metadata">
                         <h4 class="mr-2 mt-1 mb-3">{{ post.author.username }}</h4>
@@ -42,7 +42,7 @@
                         <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal" >Delete Post</button>
                         {% endif %}
                         </div>
-                        <h2 class="p-3 mt-5 text-center">{{ post.title }}</h2>
+                        <h2>{{ post.title }}</h2>
                         <p class="text-center">{{ post.content }}</p>
                     </div>
                     </article>
