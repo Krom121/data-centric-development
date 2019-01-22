@@ -66,6 +66,15 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
+"""
+
+Below is the route for the user to logout and be redirected to
+the login page.
+
+I used bootstrap warining class for loging out.
+
+"""
+
 @app.route("/logout")
 def logout():
     logout_user()

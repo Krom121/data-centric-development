@@ -44,7 +44,11 @@ class RegistrationForm(FlaskForm):
 
 
 """
+
 below is the form class for the login form
+It's very common for users to be asked for their email as the 
+user is more likely to remember their email address other than 
+a username
 
 """
 class LoginForm(FlaskForm):
@@ -90,6 +94,11 @@ class UpdateProfileForm(FlaskForm):
             if user:
                 raise ValidationError('That email has been taken. Please choose another')
 
+
+"""
+below is the postform for users to create a post 
+
+"""
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
 

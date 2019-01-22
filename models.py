@@ -35,6 +35,7 @@ post table and allow users to be commited post to the database
 
 This is the first relationship between user and post.
 One author many posts
+
 """
 
 class Post(db.Model):
