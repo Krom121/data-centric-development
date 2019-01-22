@@ -149,6 +149,12 @@ def create_post():
         return redirect(url_for('post'))
     return render_template('create_post.html', title='Create Posts', form=form, legend='New Post')
 
+"""
+
+Below is the logic for the pagination for the post route where 
+all users can view each others post
+
+"""
 
 @app.route("/post", methods=['POST', 'GET'])
 @login_required
@@ -157,10 +163,22 @@ def post():
     posts = Post.query.paginate(page = page, per_page=3)
     return render_template('post.html', title='Posts', posts=posts)
 
+"""
+
+Below is the details of the full post post detail veiw
+
+"""
+
 @app.route("/post/detail/<int:post_id>")
 def post_detail(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post_detail.html', title=post.title, post=post)
+
+"""
+
+below is where the current user can update there post.
+
+"""
 
 @app.route("/post/detail/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -179,6 +197,13 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
     return render_template('create_post.html', title='Update Posts', form=form, legend='Update Post')
+
+"""
+
+Below is the python logic for deleting a post by id.
+Only the current user of that post can delete the post.
+
+"""
 
 @app.route("/post/detail/<int:post_id>/delete", methods=['POST'])
 @login_required
