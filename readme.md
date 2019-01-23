@@ -7,6 +7,26 @@ own profile image.
 
 Futher more this blog app allows user to blog anywhere at anytime, on any device.
 
+## Features
+
+* Registration form for users to register. (Users must register      to use app)
+
+
+* Login form where users can use the recently created details.
+
+
+* account page where users can update there user info & update      thier profile image. No need to update username or email.
+
+* Users can create posts.
+
+* Users can update thier posts.
+
+* Users can delete thier posts.
+
+* Users can view thier posts and other users posts on post.html.
+
+
+---
 
 
 ## Tech Used for this app
@@ -83,9 +103,10 @@ I created mulitple users to test the app can handle multiple users. And created 
 by the users where rendered into the post.html template. Then I 
 updated the posts to ensure all posts where updated and rendered correctly.
 
-I proceded to delete all users posts. Queried the data through the python terminal to make sure all posts where delete correctly.
+I proceded to delete all users posts. Queried the database through the python terminal to make sure all posts where delete correctly.
 
 Users account profile was tested updating users email and username to make sure the database was updated with new user information. By upating the user profile image, to test that the image saved correctly. And that the output size was changed to what was set in the code, no matter what size of image was uploaded.
+
 By doing this i also made sure the users image name was changed to a set of numbers, set out by random hex. I uploaded a image with the same name cat, to know that no errors accured. This will make sure every image has a unique name.
 
 ### Test.py file
@@ -153,12 +174,15 @@ if __name__ == '__main__':
     unittest.main()
 
 ```
+### Results
+```
+-----------------------------------------------------------------
+Ran 5 tests in 0.234s
 
-The i moved on to add better test along with a base test:
-
-
+OK
 
 ---
+```
 
 ## Refrences
 
