@@ -79,6 +79,15 @@ All forms where tested when built, before saving data to the database. When the 
 
 Once this was done i added the form errors for validation. Then re-tested the forms to see the validation in place. Flash messages where used to inform the user of what is happening.
 
+I created mulitple users to test the app can handle multiple users. And created multiple posts to test that all posts created
+by the users where rendered into the post.html template. Then I 
+updated the posts to ensure all posts where updated and rendered correctly.
+
+I proceded to delete all users posts. Queried the data through the python terminal to make sure all posts where delete correctly.
+
+Users account profile was tested updating users email and username to make sure the database was updated with new user information. By upating the user profile image, to test that the image saved correctly. And that the output size was changed to what was set in the code, no matter what size of image was uploaded.
+By doing this i also made sure the users image name was changed to a set of numbers, set out by random hex. I uploaded a image with the same name cat, to know that no errors accured. This will make sure every image has a unique name.
+
 ### Test.py file
 
 

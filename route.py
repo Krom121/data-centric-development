@@ -160,7 +160,7 @@ def create_post():
 
 """
 
-Below is the logic for the pagination for the post route where 
+Below is the logic for the for the post route where 
 all users can view each others post
 
 """
@@ -168,8 +168,8 @@ all users can view each others post
 @app.route("/post", methods=['POST', 'GET'])
 @login_required
 def post():
-    page = request.args.get('page', 1, type=int)
-    posts = Post.query.paginate(page = page, per_page=3)
+
+    posts = Post.query.all()
     return render_template('post.html', title='Posts', posts=posts)
 
 """
