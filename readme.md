@@ -90,6 +90,71 @@ By doing this i also made sure the users image name was changed to a set of numb
 
 ### Test.py file
 
+The first test i coded where just simple tests to check that flask testing was install correctly test the pages loaded correctly and redirects where followed. See below the tests:
+
+```python
+from flask_testing import TestCase
+import unittest
+from blog import app, db
+
+# This test is to check that all works correctly.
+
+class FlaskTestCase(unittest.TestCase):
+
+    # This test is to check the index page loads correctly.
+
+    def test_index(self):
+        tester = app.test_client(self)
+        response = tester.get('/', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(b'Start Posting' in response.data)
+
+    # This test is to check that login page works correctly.
+
+    def test_login(self):
+        tester = app.test_client(self)
+        response = tester.get('/login', content_type='html/text')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(b'Login' in response.data)
+
+    # This test is to check that login form works as expected.
+    # follows the redirect to account page.
+
+    def test_login_form(self):
+        tester = app.test_client(self)
+        response = tester.post('/login', 
+            data=dict(email="admin", password="admin"),
+            follow_redirects=True
+        )
+        self.assertTrue(b'Login was successful. Happy posting', response.data)    
+    
+    # This test will test the login form being invalid details.
+    
+    def test_login_form_invalid(self):
+        tester = app.test_client(self)
+        response = tester.post('/login', 
+            data=dict(email="wrong", password="wrong"),
+            follow_redirects=True
+        )
+        self.assertTrue(b'Login unsuccessful. Please check email and password', response.data)
+
+    # Test the logout function works as expected
+
+    def test_logout(self):
+        tester = app.test_client(self)
+        tester.post('/login', 
+            data=dict(email="admin", password="admin"),
+            follow_redirects=True
+        )
+        response = tester.get('/logout', follow_redirects=True)
+        self.assertTrue(b'You have been logged out successfuly', response.data)
+
+if __name__ == '__main__':
+    unittest.main()
+
+```
+
+The i moved on to add better test along with a base test:
 
 
 
