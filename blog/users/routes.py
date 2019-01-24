@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from blog import db, bcrypt
 from blog.models import User, Post
-from blog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm)
+from blog.users.forms import (RegistrationForm, LoginForm, UpdateProfileForm)
 from blog.users.utils import save_picture
 
 users = Blueprint('users', __name__)

@@ -1,5 +1,7 @@
 from flask import render_template, request, Blueprint
 from blog.models import Post
+from flask_login import current_user
+from blog.users.forms import RegistrationForm
 
 main = Blueprint('main', __name__)
 
