@@ -146,6 +146,7 @@ users can not updated anyother users post.A 403 error will be raised(forbidden r
 Users can also delete their own posts, current_user posts.
 
 """
+
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def create_post():

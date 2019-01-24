@@ -54,7 +54,7 @@ Futher more this blog app allows user to blog anywhere at anytime, on any device
 
     * was used as a main production database.
 
-* Heruko
+* Linux server
 
     * was used as a production server
 
