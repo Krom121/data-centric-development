@@ -9,16 +9,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="{{ url_for('post') }}">Posts<span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{ url_for('posts.post') }}">Posts<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+                  <a class="nav-link" href="{{ url_for('users.account') }}">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('create_post') }}">Create Posts</a>
+                    <a class="nav-link" href="{{ url_for('posts.create_post') }}">Create Posts</a>
                   </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                  <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
                         <h4 class="mr-2 mt-1 mb-3">{{ post.author.username }}</h4>
                         <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
                         {% if post.author == current_user %}
-                        <a class="btn btn-info btn-sm m-1" href="{{ url_for('update_post',  post_id=post.id) }}">Update</a>
+                        <a class="btn btn-info btn-sm m-1" href="{{ url_for('posts.update_post',  post_id=post.id) }}">Update</a>
                         <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal" >Delete Post</button>
                         {% endif %}
                         </div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
                         <input class="btn btn-danger" type="submit" value="Delete">
                     </form>
                     </div>
