@@ -62,6 +62,15 @@ below is the route import from blog the reason its below the
 code above is so that the app will aviod circular imports that
 will through errors when trying to run the app.
 
+Now the app has been made into blueprints the routes have changed
+below
+
 """
 
-from blog import route
+from blog.users.routes import users
+from blog.posts.routes import posts
+from blog.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)
