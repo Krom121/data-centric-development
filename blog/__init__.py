@@ -4,11 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from blog.config import Config
 
-app = Flask(__name__)
-
-app.config.from_object(Config)
-
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 """
 Bcrypt is being used to generate user passwords and encrypt
@@ -16,7 +12,7 @@ them in the database for sercurity.
 
 """
 
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt()
 
 """
 below is the instance for the login manager and
@@ -24,7 +20,7 @@ login required
 
 """
 
-login_manager = LoginManager(app)
+login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'warning'
 
@@ -38,10 +34,24 @@ below
 
 """
 
-from blog.users.routes import users
-from blog.posts.routes import posts
-from blog.main.routes import main
 
-app.register_blueprint(users)
-app.register_blueprint(posts)
-app.register_blueprint(main)
+
+def create_app(config_class=Config):
+
+    app = Flask(__name__)
+
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+
+    from blog.users.routes import users
+    from blog.posts.routes import posts
+    from blog.main.routes import main
+
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(main)
+
+    return app
