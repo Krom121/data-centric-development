@@ -15,13 +15,17 @@ Futher more this blog app allows user to blog anywhere at anytime, on any device
 * Login form where users can use the recently created details.
 
 
-* account page where users can update there user info & update      thier profile image. No need to update username or email.
+* Account page where users can update there user info & update      thier profile image. No need to update username or email.
+
 
 * Users can create posts.
 
+
 * Users can update thier posts.
 
+
 * Users can delete thier posts.
+
 
 * Users can view thier posts and other users posts on post.html.
 
@@ -54,7 +58,7 @@ Futher more this blog app allows user to blog anywhere at anytime, on any device
 
     * was used as a main production database.
 
-* Linux server
+* Linux server cloud
 
     * was used as a production server
 
@@ -85,9 +89,15 @@ This would help put trust in the user and end up with more users using the app f
 
 SQLite was the development database for the purpose of testing, ensuring the python logic was correct, allowing for bugfixs.
 
-For the production database i decided to go with sqlprogre
+For the production database i decided to go with PostgreSQL
 
 Flask was decided on for the frameworks light weight in production and ease of use.
+
+At first I started Flask the usual way, a simple structure. Until I started getting errors form the imports. From there I changed the app into a package this resolved any issuses the app had with circular imports. 
+
+As the app got larger I came across a part of stackoverflow where the decussion was about changing a singular pakage into many using blueprints. 
+
+Blueprints allowed me to split the app into many managable readable parts. Doing this will allow the app to expand alot easier in the future.
 
 ---
 

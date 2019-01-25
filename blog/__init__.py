@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from blog.config import Config
+from flask_heroku import Heroku
 
 db = SQLAlchemy()
-
+heroku = Heroku()
 """
 Bcrypt is being used to generate user passwords and encrypt
 them in the database for sercurity.
@@ -45,6 +46,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    heroku.init_app(app)
 
     from blog.users.routes import users
     from blog.posts.routes import posts
