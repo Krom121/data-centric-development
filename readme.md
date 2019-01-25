@@ -124,6 +124,7 @@ By doing this i also made sure the users image name was changed to a set of numb
 The first test i coded where just simple tests to check that flask testing was install correctly test the pages loaded correctly and redirects where followed. See below the tests:
 
 ```python
+
 from flask_testing import TestCase
 import unittest
 from blog import app, db
