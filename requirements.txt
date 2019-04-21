@@ -53,4 +53,3 @@ virtualenv==15.1.0
 wadllib==1.3.3
 Werkzeug==0.15.2
 wrapt==1.11.1
-xkit==0.0.0
